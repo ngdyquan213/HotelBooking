@@ -29,7 +29,7 @@ input::-webkit-inner-spin-button {
 .custom-bg:hover {
     background-color: var(--teal-hover);
     border-color: var(--teal-hover);
-}s
+}
 
 .h-line{
     width: 150px;
