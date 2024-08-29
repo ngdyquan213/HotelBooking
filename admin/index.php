@@ -53,16 +53,9 @@
 
         if(isset($_POST['login'])){
             $frm_data = filteration($_POST);
-            // var_dump($frm_data);
-
             $query = "SELECT * FROM `admin_cred` WHERE `admin_name` = ? AND `admin_pass` = ?";
-            // var_dump($query);
-
             $values = [$frm_data['admin_name'], $frm_data['admin_pass']];
-            // var_dump($values);
-
             $res = select($query, $values, "ss");
-            // var_dump($res);
 
             if($res->num_rows == 1){
                 $row = mysqli_fetch_assoc($res);
@@ -75,8 +68,6 @@
         }
 
     ?>
-
-
 
     <?php require('inc/scripts.php') ?>
 </body>
