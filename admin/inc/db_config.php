@@ -10,7 +10,6 @@
     if (!$con) {
         die('Connection failed: '. mysqli_connect_error());
     }
-    // echo 'Connected successfully';   
 
     function filteration($data){
         foreach($data as $key => $value){
