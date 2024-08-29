@@ -1,5 +1,5 @@
 <?php
-    require('inc/essentials.php');
+    require('inc/essentails.php');
     adminLogin();
 ?>
 <!DOCTYPE html>
