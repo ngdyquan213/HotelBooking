@@ -1,6 +1,7 @@
 <?php
-    require('inc/essentails.php');
-    adminLogin();
+require('inc/essentails.php');
+adminLogin();
+session_regenerate_id(true);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Dashboard</title>
+    <title>Admin Panel - Settings</title>
     <?php require('inc/links.php'); ?>
 </head>
 
