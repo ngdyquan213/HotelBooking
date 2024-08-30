@@ -156,23 +156,16 @@ session_regenerate_id(true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
             xhr.onload = function() {
-
-                var myModal = document.getElementById('general-s');
-                var modal = bootstrap.Modal.getInstance(myModal);
-                modal.hide();
-
                 if (this.responseText == 1) {
-                    alert('success', 'Changes saved!');
-                    get_general();
+                    alert('success', 'Site has been shutdown!');
                 } else {
-                    alert('error', 'No changes saved!');
+                    alert('success', 'Shutdown mode off!');
                 }
+                get_general();
             }
             console.log(xhr.responseText);
-
-            xhr.send('site_title=' + site_title_val + '&site_about=' + site_about_val + '&upd_general');
+            xhr.send('upd_shutdown='+val);
         }
-
 
         window.onload = function() {
             get_general();
