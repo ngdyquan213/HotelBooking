@@ -2,7 +2,7 @@
 
 <script>
     function alert(type,msg){
-        let bs_class = (type == 'success') ? 'alert_success' : 'alert_danger';
+        let bs_class = (type == 'success') ? 'alert-success' : 'alert-danger';
         let element = document.createElement('div');
 
         element.innerHTML = `
