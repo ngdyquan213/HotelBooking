@@ -33,12 +33,13 @@ session_regenerate_id(true);
 
                         </div>
                         <h6 class="card-subtitle mb-1 fw-bold">Site Title</h6>
-                        <p class="card-text">Content</p>
+                        <p class="card-text" id="site_title">Content</p>
                         <h6 class="card-subtitle mb-1 fw-bold">About Us</h6>
-                        <p class="card-text">Content</p>
+                        <p class="card-text" id="site_about">Content</p>
                     </div>
                 </div>
 
+                <!-- General settings modal -->
                 <div class="modal fade" id="general-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <form action="">
@@ -49,29 +50,62 @@ session_regenerate_id(true);
                                 <div class="modal-body">
                                     <div class="mb-3">
                                         <label class="form-label">Site Title</label>
-                                        <input type="text" name="site_title" class="form-control shadow-none">
+                                        <input type="text" name="site_title" id="site_title_inp" class="form-control shadow-none">
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">About Us</label>
-                                        <textarea name="site_about" class="form-control shadow-none" rows="6"></textarea>
+                                        <textarea name="site_about" id="site_about_inp" class="form-control shadow-none" rows="6"></textarea>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">CANCEL</button>
+                                    <button type="button" onclick="site_title.value = general_data.site_title, site_about.value = general_data.site_about" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">CANCEL</button>
                                     <button type="button" class="btn custom-bg text-white shadow-none">SUBMIT</button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
     </div>
 
     <?php require('inc/scripts.php'); ?>
+    <script>
+        let general_data;
+
+        function get_general(){
+            let site_title = document.getElementById('site_title');
+            let site_about = document.getElementById('site_about');
+
+            let site_title_inp = document.getElementById('site_title_inp');
+            let site_about_inp = document.getElementById('site_about_inp');
+            
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', 'ajax/settings_crud.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onload = function(){
+                general_data = JSON.parse(this.responseText);
+
+                site_title.innerHTML = general_data.site_title;
+                site_about.innerHTML = general_data.site_about;
+
+                site_title_inp.value = general_data.site_title;
+                site_about_inp.value = general_data.site_about;
+
+                console.log(general_data);
+            }
+
+            xhr.send('get_general');
+        }
+
+        window.onload = function(){
+            get_general();
+        }
+
+
+    </script>
+
 </body>
 
 </html>
