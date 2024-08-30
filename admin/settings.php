@@ -38,7 +38,6 @@ session_regenerate_id(true);
                     </div>
                 </div>
 
-                <div class="modal-footer">TEST</div>
                 <!-- General settings modal -->
 
                 <div class="modal fade" id="general-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
