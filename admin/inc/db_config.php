@@ -37,3 +37,20 @@
             die("Query cannot be prepared - Select statement");
         }
     }
+
+    function update($sql, $value, $datatypes){
+        $con = $GLOBALS['con'];
+        if($stmt = mysqli_prepare($con, $sql)){
+            mysqli_stmt_bind_param($stmt,$datatypes,...$value);
+            if(mysqli_stmt_execute($stmt)){
+                $res = mysqli_stmt_affected_rows($stmt);
+                mysqli_stmt_close($stmt);
+                return $res;
+            }else{
+                mysqli_stmt_close($stmt);
+                die("Query cannot be executed - Update statement");
+            }
+        }else{
+            die("Query cannot be prepared - Update statement");
+        }
+    }

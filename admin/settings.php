@@ -59,7 +59,7 @@ session_regenerate_id(true);
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" onclick="site_title.value = general_data.site_title, site_about.value = general_data.site_about" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">CANCEL</button>
-                                    <button type="button" class="btn custom-bg text-white shadow-none">SUBMIT</button>
+                                    <button type="button" onclick="upd_general(site_title.value, site_about.value)" class="btn custom-bg text-white shadow-none">SUBMIT</button>
                                 </div>
                             </div>
                         </form>
@@ -73,37 +73,45 @@ session_regenerate_id(true);
     <script>
         let general_data;
 
-        function get_general(){
+        function get_general() {
             let site_title = document.getElementById('site_title');
             let site_about = document.getElementById('site_about');
 
             let site_title_inp = document.getElementById('site_title_inp');
             let site_about_inp = document.getElementById('site_about_inp');
-            
+
+        }
+
+        function upd_general(site_title_val, site_about_val) {
             let xhr = new XMLHttpRequest();
             xhr.open('POST', 'ajax/settings_crud.php', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-            xhr.onload = function(){
-                general_data = JSON.parse(this.responseText);
+            xhr.onload = function() {
 
-                site_title.innerHTML = general_data.site_title;
-                site_about.innerHTML = general_data.site_about;
+                var myModal = document.getElementById('general-s');
+                var modal = bootstrap.Modal.getInstance(myModal);
 
-                site_title_inp.value = general_data.site_title;
-                site_about_inp.value = general_data.site_about;
+                modal.hidden();
 
-                console.log(general_data);
+                if(this.responseText == 1){
+                    alert('Success','Changes saved!');
+                    get_general();
+                
+                }else{
+                    alert('error','No changes saved!');
+                    
+                }
+
+
             }
 
-            xhr.send('get_general');
+            xhr.send('site_title=' + site_title_val + '&site_about=' + site_about_val + '&upd_general');
         }
 
-        window.onload = function(){
+        window.onload = function() {
             get_general();
         }
-
-
     </script>
 
 </body>
