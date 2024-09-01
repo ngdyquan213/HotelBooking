@@ -250,13 +250,12 @@ session_regenerate_id(true);
                 contact_data = JSON.parse(this.responseText);
                 console.log(contact_data);
             }
-
-            xhr.send('get_general');
+            xhr.send('get_contacts');
         }
-
 
         window.onload = function() {
             get_general();
+            get_contacts();
         }
     </script>
 
