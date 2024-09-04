@@ -21,6 +21,12 @@
         return $data;
     }
 
+    function selectAll($table){
+        $con = $GLOBALS['con'];
+        $res = mysqli_query($con, "SELECT * FROM $table");
+        return $res;
+    }
+
     function select($sql, $value, $datatypes){
         $con = $GLOBALS['con'];
         if($stmt = mysqli_prepare($con, $sql)){
@@ -69,5 +75,22 @@
             }
         }else{
             die("Query cannot be prepared - Insert");
+        }
+    }
+
+    function detele($sql, $value, $datatypes){
+        $con = $GLOBALS['con'];
+        if($stmt = mysqli_prepare($con, $sql)){
+            mysqli_stmt_bind_param($stmt,$datatypes,...$value);
+            if(mysqli_stmt_execute($stmt)){
+                $res = mysqli_stmt_affected_rows($stmt);
+                mysqli_stmt_close($stmt);
+                return $res;
+            }else{
+                mysqli_stmt_close($stmt);
+                die("Query cannot be executed - Detele");
+            }
+        }else{
+            die("Query cannot be prepared - Detele");
         }
     }

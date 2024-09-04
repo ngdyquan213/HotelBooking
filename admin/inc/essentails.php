@@ -1,5 +1,13 @@
 <?php 
 
+    // frontend purpose data
+
+    define('SITE_URL','http://127.0.0.1/HotelBooking/');
+    define('ABOUT_IMG_PATH', SITE_URL.'images/about/' );
+
+
+    // backend upload progress needs this data
+
     define('UPLOAD_IMAGE_PATH', $_SERVER['DOCUMENT_ROOT'].'/HotelBooking/images/');
     define('ABOUT_FOLDER', 'about/');
     function adminLogin() {
@@ -31,7 +39,7 @@
     }
 
     function uploadImage($image, $folder){
-        $valid_mine = ['image/jpeg', 'image/png', 'image/webp'];
+        $valid_mine = ['image/jpg','image/jpeg', 'image/png', 'image/webp'];
         $img_mine = $image['type'];
 
         if(!in_array($img_mine, $valid_mine)){
@@ -46,9 +54,16 @@
             if(move_uploaded_file($image['tmp_name'],$img_path)){
                 return $rname;
             }else{
-                echo '5';
                 return 'upd_failed';
             }
-
         }
+    }
+
+    function deleteImage($image, $folder){
+        if(unlink(UPLOAD_IMAGE_PATH.$folder.$image)){
+            return true;
+        }else{
+            return false;
+        }
+
     }

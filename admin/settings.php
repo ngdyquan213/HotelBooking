@@ -250,11 +250,11 @@ session_regenerate_id(true);
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label fw-bold">Picture</label>
-                                        <input type="file" name="member_picture" id="member_picture_inp" accept="[.jpg, .png, .webp, .jpeg]" class="form-control shadow-none" required>
+                                        <input type="file" name="member_picture" id="member_picture_inp" accept=".png, .webp, .jpeg, .jpg" class="form-control shadow-none" required>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" onclick="" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">CANCEL</button>
+                                    <button type="button" onclick="member_name.value='', member_picture.value=''" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">CANCEL</button>
                                     <button type="submit" class="btn custom-bg text-white shadow-none">SUBMIT</button>
                                 </div>
                             </div>
@@ -423,16 +423,16 @@ session_regenerate_id(true);
             xhr.send(data_str);
         }
 
-        team_s_form.addEventListener('submit', function(e){
+        team_s_form.addEventListener('submit', function(e) {
             e.preventDefault();
             add_member();
         });
 
-        function add_member(){
+        function add_member() {
             let data = new FormData();
             data.append('name', member_name_inp.value);
             data.append('picture', member_picture_inp.files[0]);
-            data.append('add_member','');
+            data.append('add_member', '');
 
             let xhr = new XMLHttpRequest();
             xhr.open('POST', 'ajax/settings_crud.php', true);
@@ -443,24 +443,57 @@ session_regenerate_id(true);
                 modal.hide();
 
                 if (this.responseText == 'inv_img') {
-                    alert('error', 'Only JPG and PNG images are allowed!'); 
+                    alert('error', 'Only JPG and PNG images are allowed!');
                     get_general();
-                } else if(this.responseText == 'inv_size'){
+                } else if (this.responseText == 'inv_size') {
                     alert('error', 'Image should be less than 2MB!');
-                } else if(this.responseText == 'upd_failed'){
+                } else if (this.responseText == 'upd_failed') {
                     alert('error', 'Image upload failed. Server Down!');
-                }else{
+                } else {
                     alert('success', 'New member team member!');
                     member_name_inp.value = '';
                     member_picture_inp.value = '';
+                    get_members();
                 }
             }
             xhr.send(data);
         }
 
+        function get_members(){
+
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', 'ajax/settings_crud.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onload = function() { 
+                // console.log(this.responseText);
+                document.getElementById('team-data').innerHTML = this.responseText;
+            }
+
+            xhr.send('get_members');
+        }
+
+        function rem_member(val){
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', 'ajax/settings_crud.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onload = function() {
+                
+                if(this.responseText == 1){
+                    alert('success', 'Member removed successfully!');
+                }else{
+                    alert('error', 'Failed to remove member. Server Down!');
+                }
+                get_members();
+            }
+            xhr.send('rem_member=' + val);
+        }
+
         window.onload = function() {
             get_general();
             get_contacts();
+            get_members();
         }
     </script>
 
