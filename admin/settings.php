@@ -255,12 +255,13 @@ session_regenerate_id(true);
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" onclick="" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">CANCEL</button>
-                                    <button type="submit" onclick="upd_general(site_title.value,site_about.value)" class="btn custom-bg text-white shadow-none">SUBMIT</button>
+                                    <button type="submit" class="btn custom-bg text-white shadow-none">SUBMIT</button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
+
 
             </div>
         </div>
@@ -437,23 +438,22 @@ session_regenerate_id(true);
             let data = new FormData();
             data.append('name', member_name_inp.value);
             data.append('picture', member_picture_inp.files[0]);
-            data.append('add_member', '');
+            data.append('add_member','');
 
             let xhr = new XMLHttpRequest();
             xhr.open('POST', 'ajax/settings_crud.php', true);
 
             xhr.onload = function() {
+                // var myModal = document.getElementById('general-s');
+                // var modal = bootstrap.Modal.getInstance(myModal);
+                // modal.hide();
 
-                var myModal = document.getElementById('general-s');
-                var modal = bootstrap.Modal.getInstance(myModal);
-                modal.hide();
-
-                if (this.responseText == 1) {
-                    alert('success', 'Changes saved!');
-                    get_general();
-                } else {
-                    alert('error', 'No changes saved!');
-                }
+                // if (this.responseText == 1) {
+                //     alert('success', 'Changes saved!');
+                //     get_general();
+                // } else {
+                //     alert('error', 'No changes saved!');
+                // }
             }
             xhr.send(data);
         }
