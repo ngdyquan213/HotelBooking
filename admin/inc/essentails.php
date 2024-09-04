@@ -35,9 +35,9 @@
         $img_mine = $image['type'];
 
         if(!in_array($img_mine, $valid_mine)){
-            return 'inv_img'; // val entension
+            return 'inv_img';
         }else if(($image['size'])/(1024*1024) > 2){
-            return 'inv_sive'; // val size
+            return 'inv_sive'; 
         }else{
             $ext = pathinfo($image['name'], PATHINFO_EXTENSION);
             $rname = 'IMG_'.random_int(11111, 99999).".$ext";
@@ -46,6 +46,7 @@
             if(move_uploaded_file($image['tmp_name'],$img_path)){
                 return $rname;
             }else{
+                echo '5';
                 return 'upd_failed';
             }
 

@@ -352,7 +352,6 @@ session_regenerate_id(true);
                 }
                 get_general();
             }
-            console.log(xhr.responseText);
             xhr.send('upd_shutdown=' + val);
         }
 
@@ -413,8 +412,6 @@ session_regenerate_id(true);
                 var modal = bootstrap.Modal.getInstance(myModal);
                 modal.hide();
 
-                console.log(this.responseText)
-
                 if (this.responseText == 1) {
                     alert('success', 'Changes saved!');
                 } else {
@@ -424,9 +421,6 @@ session_regenerate_id(true);
             }
 
             xhr.send(data_str);
-
-
-
         }
 
         team_s_form.addEventListener('submit', function(e){
@@ -444,16 +438,22 @@ session_regenerate_id(true);
             xhr.open('POST', 'ajax/settings_crud.php', true);
 
             xhr.onload = function() {
-                // var myModal = document.getElementById('general-s');
-                // var modal = bootstrap.Modal.getInstance(myModal);
-                // modal.hide();
+                var myModal = document.getElementById('team-s');
+                var modal = bootstrap.Modal.getInstance(myModal);
+                modal.hide();
 
-                // if (this.responseText == 1) {
-                //     alert('success', 'Changes saved!');
-                //     get_general();
-                // } else {
-                //     alert('error', 'No changes saved!');
-                // }
+                if (this.responseText == 'inv_img') {
+                    alert('error', 'Only JPG and PNG images are allowed!'); 
+                    get_general();
+                } else if(this.responseText == 'inv_size'){
+                    alert('error', 'Image should be less than 2MB!');
+                } else if(this.responseText == 'upd_failed'){
+                    alert('error', 'Image upload failed. Server Down!');
+                }else{
+                    alert('success', 'New member team member!');
+                    member_name_inp.value = '';
+                    member_picture_inp.value = '';
+                }
             }
             xhr.send(data);
         }
