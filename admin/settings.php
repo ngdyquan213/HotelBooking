@@ -60,7 +60,7 @@ session_regenerate_id(true);
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" onclick="site_title.value = general_data.site_title, site_about.value = general_data.site_about" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">CANCEL</button>
-                                    <button type="submit" onclick="upd_general(site_title.value,site_about.value)" class="btn custom-bg text-white shadow-none">SUBMIT</button>
+                                    <button type="submit" class="btn custom-bg text-white shadow-none">SUBMIT</button>
                                 </div>
                             </div>
                         </form>
@@ -174,11 +174,11 @@ session_regenerate_id(true);
                                                     <label class="form-label fw-bold">Phone Number (with country code)</label>
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text"><i class="bi bi-telephone-fill"></i></span>
-                                                        <input type="text" name="pn1" id="pn1_inp" class="form-control shadow-none" required>
+                                                        <input type="number" name="pn1" id="pn1_inp" class="form-control shadow-none" required>
                                                     </div>
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text"><i class="bi bi-telephone-fill"></i></span>
-                                                        <input type="text" name="pn2" id="pn2_inp" class="form-control shadow-none">
+                                                        <input type="number" name="pn2" id="pn2_inp" class="form-control shadow-none">
                                                     </div>
                                                 </div>
                                                 <div class="mb-3">
@@ -309,7 +309,6 @@ session_regenerate_id(true);
                     shutdown_toggle.value = 1;
                 }
             }
-
             xhr.send('get_general');
         }
 
@@ -329,12 +328,14 @@ session_regenerate_id(true);
                 var modal = bootstrap.Modal.getInstance(myModal);
                 modal.hide();
 
+                console.log('Response Text:', this.responseText);
+
                 if (this.responseText == 1) {
                     alert('success', 'Changes saved!');
-                    get_general();
                 } else {
                     alert('error', 'No changes saved!');
                 }
+                get_general();
             }
             xhr.send('site_title=' + site_title_val + '&site_about=' + site_about_val + '&upd_general');
         }
@@ -466,7 +467,6 @@ session_regenerate_id(true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
             xhr.onload = function() { 
-                // console.log(this.responseText);
                 document.getElementById('team-data').innerHTML = this.responseText;
             }
 

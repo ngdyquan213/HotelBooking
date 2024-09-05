@@ -31,11 +31,11 @@ input::-webkit-inner-spin-button {
     border-color: var(--teal-hover);
 }
 
-.h-line{
+/* .h-line{
     width: 150px;
     margin: 0 auto;
     height: 1.7px;
-}
+} */
 
 .custom-alert{
     position: fixed;
