@@ -328,8 +328,6 @@ session_regenerate_id(true);
                 var modal = bootstrap.Modal.getInstance(myModal);
                 modal.hide();
 
-                console.log('Response Text:', this.responseText);
-
                 if (this.responseText == 1) {
                     alert('success', 'Changes saved!');
                 } else {
