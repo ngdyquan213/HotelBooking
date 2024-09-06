@@ -3,13 +3,17 @@
     // frontend purpose data
 
     define('SITE_URL','http://127.0.0.1/HotelBooking/');
-    define('ABOUT_IMG_PATH', SITE_URL.'images/about/' );
+    define('ABOUT_IMG_PATH', SITE_URL.'images/about/');
+    define('CAROUSEL_IMG_PATH', SITE_URL.'images/carousel/');
 
 
     // backend upload progress needs this data
 
     define('UPLOAD_IMAGE_PATH', $_SERVER['DOCUMENT_ROOT'].'/HotelBooking/images/');
     define('ABOUT_FOLDER', 'about/');
+    define('CAROUSEL_FOLDER', 'carousel/');
+
+
     function adminLogin() {
         session_start();
         if(!(isset($_SESSION['adminLogin']) && $_SESSION['adminLogin'] == true)){
