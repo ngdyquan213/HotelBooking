@@ -27,6 +27,12 @@ input::-webkit-inner-spin-button {
     -moz-appearance: textfield;
 } */
 
+.custom-alert{
+    position: fixed;
+    top: 80px;
+    right: 25px;
+}
+
 .custom-bg {
     background-color: var(--teal);
     border: 1px solid var(--teal);

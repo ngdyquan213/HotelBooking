@@ -1,7 +1,6 @@
 <?php
-require('inc/essentails.php');
-adminLogin();
-session_regenerate_id(true);
+    require('inc/essentails.php');
+    adminLogin();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +22,7 @@ session_regenerate_id(true);
                 <h3 class="mb-4">Carousel</h3>
 
 
-                <!-- Carousel Team section -->
+                <!-- Carousel section -->
 
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body">
@@ -38,7 +37,7 @@ session_regenerate_id(true);
                 </div>
 
 
-                <!-- Management Team modal -->
+                <!-- Carousel modal -->
 
                 <div class="modal fade" id="carousel-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
