@@ -12,6 +12,9 @@
             </div>
         `;
         document.body.append(element);
+        setTimeout(() => {
+            document.querySelector('.alert').remove();
+        }, 1000);
     }
 
     function setActive(){

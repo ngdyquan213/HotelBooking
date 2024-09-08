@@ -42,9 +42,9 @@
 
     if(isset($_POST['rem_image'])){
         $frm_data = filteration($_POST);
-        $values = [$frm_data['rem_image']];
-
+    
         $pre_q = "SELECT * FROM `carousel` WHERE `sr_no` = ?";
+        $values = [$frm_data['rem_image']];
         $res = select($pre_q, $values, 'i');
         $img = mysqli_fetch_assoc($res);
 
