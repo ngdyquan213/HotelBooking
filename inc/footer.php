@@ -1,12 +1,9 @@
 <div class="container-fluid bg-white mt-5">
     <div class="row">
         <div class="col-lg-4 p-4">
-            <h3 class="h-font fw-bold fs-3 mb-2">DQ HOTEL</h3>
+            <h3 class="h-font fw-bold fs-3 mb-2"><?php echo $settings_r['site_title'] ?></h3>
             <p>
-                Address: 1234 Main St, City, State, ZIP Code<br>
-                Phone: +84 772 830 484<br>
-                Email: support@dqhotel.com<br>
-                Website: www.qdhotel.com
+                <?php echo $settings_r['site_about'] ?>
             </p>
         </div>
         <div class="col-lg-4 p-4">
@@ -79,9 +76,9 @@
             document.getElementById(position).appendChild(element);
         }
 
-        setTimeout(() => {
-            document.querySelector('.alert').remove();
-        }, 4000);
+        // setTimeout(() => {
+        //     document.querySelector('.alert').remove();
+        // }, 4000);
     }
 
     let register_form = document.getElementById('register-form');
@@ -107,7 +104,7 @@
         modal.hide();
 
         let xhr = new XMLHttpRequest();
-        xhr.open('POST', './', true);
+        xhr.open('POST', 'ajax/login_register.php', true);
 
         xhr.onload = function() {
             if(this.responseText == 'pass_mismatch'){
