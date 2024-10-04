@@ -36,7 +36,7 @@
                 <tr>
                     <td>$i</td>
                     <td>
-                        <img src='#' width='55px'><br>
+                        <img src='$path$row[profile]' width='55px'><br>
                         $row[name]
                     </td>
                     <td>$row[email]</td>

@@ -24,9 +24,9 @@
             </ul>
             <div class="d-flex">
                 <?php
-                    if(isset($_SESSION['login']) && $_SESSION['login'] == true){
-                        $path = USERS_IMG_PATH;
-                        echo<<<data
+                if (isset($_SESSION['login']) && $_SESSION['login'] == true) {
+                    $path = USERS_IMG_PATH;
+                    echo <<<data
                             <div class="btn-group">
                                 <button type="button" class="btn btn-outline-dark shadow-none dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                                     <img src="$path$_SESSION[uPic]" style="width: 25px; height: 25px;" class="me-1">
@@ -39,8 +39,8 @@
                                 </ul>
                             </div>
                         data;
-                    }else{
-                        echo<<<data
+                } else {
+                    echo <<<data
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-outline-dark shadow-none me-lg-3 me-2" data-bs-toggle="modal" data-bs-target="#loginModal">
                                 Login
@@ -49,7 +49,7 @@
                                 Register
                             </button>
                         data;
-                    }
+                }
                 ?>
             </div>
         </div>
@@ -70,7 +70,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label">Email / MOBILE</label>
-                        <input type="text" name="emai_mob" required class="form-control shadow-none">
+                        <input type="text" name="email_mob" required class="form-control shadow-none">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Password</label>
@@ -78,7 +78,9 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-between mb-2">
                         <button type="submit" class="btn btn-dark shadow-none">LOGIN</button>
-                        <a href="javascript: void(0)" class="text-secondary text-decoration-none">Forgot Password?</a>
+                        <button type="button" class="btn text-secondary text-decoration-none shadow-none p-0" data-bs-toggle="modal" data-bs-target="#forgotModal">
+                            Forgot Password?
+                        </button>
                     </div>
                 </div>
             </form>

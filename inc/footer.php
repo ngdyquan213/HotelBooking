@@ -140,7 +140,7 @@
         data.append('pass', login_form.elements['pass'].value);
         data.append('login', '');
 
-        var myModal = document.getElementById('registerModal');
+        var myModal = document.getElementById('loginModal');
         var modal = bootstrap.Modal.getInstance(myModal);
         modal.hide();
 
@@ -161,8 +161,9 @@
                 window.location = window.location.pathname;
                 location.reload();
             }
+            login_form.reset();
         }
-
+        xhr.send(data);
     });
 
     setActive();
