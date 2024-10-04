@@ -141,7 +141,7 @@
                         if(isset($_SESSION['login']) && $_SESSION['login'] == true){
                             $login = 1;
                         }
-                        $book_btn = "<button onclick='checkLoginToBook()' class='btn btn-sm text-white custom-bg shadow-none'>Book Now</button>";
+                        $book_btn = "<button onclick='checkLoginToBook($login, $room_data[id])' class='btn btn-sm text-white custom-bg shadow-none'>Book Now</button>";
                     }
 
 

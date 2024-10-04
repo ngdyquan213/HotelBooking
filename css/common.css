@@ -35,7 +35,7 @@ input::-webkit-inner-spin-button {
 }
 
 .custom-bg {
-    background-color: var(--teal);
+    background-color: var(--teal) !important;
     border: 1px solid var(--teal);
 }
 
