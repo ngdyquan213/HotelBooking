@@ -2,7 +2,7 @@
 
     // frontend purpose data
 
-    define('SITE_URL','http://127.0.0.1/HotelBooking/');
+    define('SITE_URL','http://localhost/HotelBooking/');
     define('ABOUT_IMG_PATH', SITE_URL.'images/about/');
     define('CAROUSEL_IMG_PATH', SITE_URL.'images/carousel/');
     define('FACILITIES_IMG_PATH', SITE_URL.'images/facilities/');

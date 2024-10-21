@@ -90,7 +90,7 @@
             <div class="col-lg-5 col-md-12 px-4">
                 <div class="card mb-4 border-0 shadow-sm rounded-3">
                     <div class="card-body">
-                        <form id="booking_form">
+                        <form action="pay_now.php" method="POST" id="booking_form">
                             <h6 class="mb-3">BOOKING DETAILS</h6>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
@@ -168,7 +168,7 @@
                     }else if(data.status == 'unavailable'){
                         pay_info.innerText = "Room is not available for the selected date!";
                     }else{
-                        pay_info.innerHTML = "No. of Days: "+data.days+"<br>Total Amount to Pay: "+data.payment;
+                        pay_info.innerHTML = "No. of Days: "+data.days+"<br>Total Amount to Pay: " + data.payment;
                         pay_info.classList.replace('text-danger', 'text-dark');
                         booking_form.elements['pay_now'].removeAttribute('disabled');
                     }
@@ -176,7 +176,6 @@
                     info_loader.classList.add('d-none');
                 }
                 xhr.send(data);
-
             }
 
         }

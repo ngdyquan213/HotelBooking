@@ -4,7 +4,6 @@
     require('../inc/essentails.php');
     adminLogin();
 
-
     if(isset($_POST['get_users'])){
         $res = selectAll('user_cred');
         $i = 1;

@@ -48,7 +48,6 @@
         }
     }
 
-
     if(isset($_POST['add_facility'])){
         $frm_data = filteration($_POST);
 

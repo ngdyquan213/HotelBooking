@@ -30,10 +30,27 @@
         }else{
             $_SESSION['room'];
 
+            $tb_query = "SELECT COUNT(*) AS `total_bookings` FROM `booking_order`
+                WHERE `booking_status` = ? AND room_id = ?
+                AND `check_out` > ? AND `check_in` < ?";
+
+            $values = ['booked', $_SESSION['room']['id'], $frm_data['checkin'], $frm_data['checkout']];
+            $tb_fetch = mysqli_fetch_assoc(select($tb_query, $values, 'siss'));
+
+            $rq_result = select("SELECT `quantity` FROM `rooms` WHERE `id` =?", [$_SESSION['room']['id']], 'i');
+            $re_fetch = mysqli_fetch_assoc($rq_result);
+
+            if(($re_fetch['quantity'] - $tb_fetch['total_bookings']) == 0 ){
+                $status = 'unavailable';
+                $result = json_encode(['status'=>$status]);
+                echo $result;
+                exit;
+            }
+
             $count_days = date_diff($checkout_date, $checkin_date)->days;
             $payment = $_SESSION['room']['price'] * $count_days;
 
-            $_SESSION['room']['[payment'] = $payment;
+            $_SESSION['room']['payment'] = $payment;
             $_SESSION['room']['available'] = true;
 
             $result = json_encode(["status" => 'available', "days" => $count_days, "payment" => $payment]);
