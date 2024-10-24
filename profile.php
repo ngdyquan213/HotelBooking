@@ -192,7 +192,6 @@
             xhr.open('POST', 'ajax/profile.php', true);
 
             xhr.onload = function() {
-
                 console.log(this.responseText);
                 if (this.responseText == 'mismatch') {
                     alert('error', "Password do not match!");

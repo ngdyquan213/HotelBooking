@@ -61,8 +61,8 @@
                                     <span>FACILITIES</span>
                                     <button id="facilities_btn" onclick="facilities_clear()" class="btn shadow-none btn-sm text-secondary d-none">Reset</button>
                                 </h5>
+                                
                                 <?php
-
                                 $facilities_q = selectAll('facilities');
                                 while ($row = mysqli_fetch_assoc($facilities_q)) {
                                     echo <<<facilities
@@ -72,7 +72,6 @@
                                             </div>
                                         facilities;
                                 }
-
                                 ?>
 
                             </div>

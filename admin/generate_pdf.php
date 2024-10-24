@@ -1,17 +1,17 @@
-<?php 
+<?php
+require('inc/essentails.php');
+require('inc/db_config.php');
+require('inc/mpdf/vendor/autoload.php');
+adminLogin();
 
-    require('admin/inc/essentails.php');
-    require('admin/inc/db_config.php');
-    adminLogin();
+if (!(isset($_SESSION['login']) && $_SESSION['login'] == true)) {
+    redirect('index.php');
+}
 
-    if(!(isset($_SESSION['login']) && $_SESSION['login'] == true)){
-        redirect('index.php');
-    }
+if (isset($_GET['gen_pdf']) && $_GET['id']) {
+    $frm_data = filteration($_GET);
 
-    if(isset($_GET['gen_pdf']) && $_GET['id']){
-        $frm_data = filteration($_GET);
-
-        $query = "SELECT bo.*, bd.*, uc.email FROM `booking_order` bo 
+    $query = "SELECT bo.*, bd.*, uc.email FROM `booking_order` bo 
         INNER JOIN `booking_details` bd ON bo.booking_id = bd.booking_id
         INNER JOIN `user_cred` uc ON bo.user_id = uc.id
         WHERE ((bo.booking_status='booked' AND bo.arrival = 1)
@@ -19,24 +19,24 @@
         OR (bo.booking_status='payment failed'))
         AND bo.booking_id = '$frm_data[id]'";
 
-        $res =mysqli_query($con, $query);
+    $res = mysqli_query($con, $query);
 
-        $total_rows = mysqli_num_rows($res);
+    $total_rows = mysqli_num_rows($res);
 
-        if ($total_rows == 0) {
-            header('location: index.php');
-            exit;
-        }
+    if ($total_rows == 0) {
+        header('location: dashboard.php');
+        exit;
+    }
 
-        $data = mysqli_fetch_assoc($res);
+    $data = mysqli_fetch_assoc($res);
 
-        $date = date("H:ia | d-m-Y", strtotime($data['datetime']));
-        $checkin = date("d-m-Y", strtotime($data['check_in']));
-        $checkout = date("d-m-Y", strtotime($data['check_out']));
+    $date = date("H:ia | d-m-Y", strtotime($data['datetime']));
+    $checkin = date("d-m-Y", strtotime($data['check_in']));
+    $checkout = date("d-m-Y", strtotime($data['check_out']));
 
-        $table_data ="
+    $table_data = "
             <h2>BOOKING RECIEPT</h2>
-            <table>
+            <table border='1'>
                 <tr>
                     <td>Order ID: $data[order_id]</td>
                     <td>Booking Date: $date</td>
@@ -62,35 +62,36 @@
                 </tr>
         ";
 
-        if($data['booking_status'] == 'cancelled'){
-            $refund = ($data['refund']) ? "Amount Refunded" : "Not Yet Refunded";
+    if ($data['booking_status'] == 'cancelled') {
+        $refund = ($data['refund']) ? "Amount Refunded" : "Not Yet Refunded";
 
-            $table_data .= "
+        $table_data .= "
                 <tr>
                     <td>Amount Paid: $data[trans_amt]</td>
                     <td>Refund: $refund</td>
                 </tr>
             ";
-        }else if($data['booking_status'] == 'payment failed'){
-            $table_data.= "
+    } else if ($data['booking_status'] == 'payment failed') {
+        $table_data .= "
                 <tr>
                     <td>Transaction Amount: $data[trans_amt]</td>
-                    <td>Payment Response: $data[trans_resp_msg]</td>
+                    <td>Payment Response: $data[trans_res_msg]</td>
                 </tr>
             ";
-        }else{
-            $table_data.= "
+    } else {
+        $table_data .= "
                 <tr>
                     <td>Room Number: $data[room_no]</td>
                     <td>Amount Paid: $data[trans_amt]</td>
                 </tr>
             ";
-        }
-
-        $table_data.="</table>";
-
-        echo $table_data;
-
-    }else{
-        header('location: index.php');
     }
+
+    $table_data .= "</table>";
+
+    $mpdf = new \Mpdf\Mpdf();
+    $mpdf->WriteHTML($table_data);
+    $mpdf->Output($data['order_id'] . '.pdf', 'D');
+} else {
+    header('location: dashboard.php');
+}

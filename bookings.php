@@ -68,12 +68,12 @@
                     if ($data['refund'] == 0) {
                         $btn = "<span class='badge bg-primary'>Refund in process!</span>";
                     } else {
-                        $btn = "<a href='generate_pdf.php&gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'>Download PDF</a>";
+                        $btn = "<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'>Download PDF</a>";
                     }
                 } else {
                     $status_bg = "bg-warning";
 
-                    $btn = "<a href='generate_pdf.php&gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'>Download PDF</a>";
+                    $btn = "<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'>Download PDF</a>";
                 }
 
                 echo <<<bookings

@@ -2,13 +2,12 @@
 
 require('../admin/inc/essentails.php');
 require('../admin/inc/db_config.php');
-
 date_default_timezone_set('Asia/Ho_Chi_Minh');
+
+session_start();
 
 if (isset($_POST['info_form'])) {
     $frm_data = filteration($_POST);
-    session_start();
-
     $u_exist = select(
         "SELECT * FROM `user_cred` WHERE `phonenum`=? AND `id`!=? LIMIT 1",
         [$data['phonenum'], $_SESSION['uId']],
@@ -41,8 +40,6 @@ if (isset($_POST['info_form'])) {
 
 
 if (isset($_POST['profile_form'])) {
-    session_start();
-
     $img = uploadUserImage($_FILES['profile']);
 
     if($img == 'inv_img' ){
@@ -76,16 +73,15 @@ if (isset($_POST['profile_form'])) {
 
 if (isset($_POST['pass_form'])) {
     $frm_data = filteration($_POST);
-    session_start();
 
-    if($frm_data['new_pass'] != $frm_data['confirm_pass']) {
+    if($frm_data['new_pass'] != $frm_data['comfirm_pass']) {
         echo 'mismatch';
         exit;
     }
 
     $enc_pass = password_hash($frm_data['new_pass'], PASSWORD_BCRYPT);
 
-    $query = "UPDATE `user_cred` SET `password`=? WHERE `id`=? LIMIT 1";
+    $query = "UPDATE `user_cred` SET `password`= ? WHERE `id`=? LIMIT 1";
     $values = [
         $enc_pass,
         $_SESSION['uId']
